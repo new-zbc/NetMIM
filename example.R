@@ -33,14 +33,14 @@ prior = list(tau_c = 0.001,
              f = 0.5,
              graph = gene_network)
 
-source("R/NIBAMM.R")
+source("R/NetMIM.R")
 
 result = NIBAMM(data, prior = prior, max_iters = 10000)
 colMeans(result$gamma)
 
 
 ### cross validation
-source("R/cvNIBAMM.R")
+source("R/cvNetMIM.R")
 full_data_index = intersect(which(!is.na(E[, 1])), which(!is.na(M[, 1])))
 
 result = cvNIBAMM(data, full_data_index, prior, n.burnin = 2000, max_iters = 8000)
@@ -58,6 +58,6 @@ data$E = E
 data$M = M
 data$map = map
 
-source("R/survivalNIBAMM.R")
+source("R/survivalNetMIM.R")
 result = survivalNIBAMM(data, prior = prior, max_iters = 10000)
 colMeans(result$gamma)
